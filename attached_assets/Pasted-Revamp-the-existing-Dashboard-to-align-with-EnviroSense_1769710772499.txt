@@ -1,0 +1,72 @@
+Revamp the existing Dashboard to align with EnviroSense’s current role as a decision-support and environmental intelligence platform.
+
+Dashboard Role:
+The Dashboard should function as an orientation and summary screen, not a marketing or landing page. It must help users quickly understand their environmental context, current progress, and what action to take next.
+
+Layout & Content Changes:
+
+1. Remove / De-emphasize Marketing Hero
+- Remove or significantly reduce the large hero section (“Get closer to nature”).
+- Replace it with a concise header:
+  “Your Environmental Snapshot”
+- Subtext:
+  “Based on your location and current selections”
+
+2. Environmental Snapshot (Top Section)
+Group existing metrics (AQI, CO₂, Humidity) under a single card titled:
+“Today’s Environment”
+
+Add a short interpretation line below the metrics, such as:
+“Conditions today are favorable for outdoor activity and solar generation.”
+
+This interpretation must be text-based, not color-only.
+
+3. Core Action Summary Cards (Primary Dashboard Content)
+Replace the existing feature cards with three action-oriented summary cards:
+
+a) Solar Status Card
+- Title: “Solar Intelligence”
+- Content:
+  “Solar installation is recommended for your region”
+  “Estimated energy offset: ~70–80%”
+- CTA Button: “View Solar Intelligence”
+
+b) Your Garden Card
+- Title: “Your Garden”
+- Content:
+  “Plants selected: X”
+  “Estimated CO₂ absorption: ~Y–Z kg/year”
+- CTA Button: “View Your Garden”
+
+c) Green Credits Card
+- Title: “Green Credits Awareness”
+- Content:
+  “Eligible environmental actions identified”
+  “Learn how citizens can participate”
+- CTA Button: “Explore Green Credits”
+
+4. “What You Can Do Next” Section
+Add a short guidance section with 3 bullet points:
+- “Check if solar is worth it for your home”
+- “Choose plants suited to your lifestyle”
+- “Understand how Green Credits work”
+
+This section is informational only and helps guide user flow.
+
+5. Daily Tip (Retain, Reposition)
+Keep the Daily Tip feature but move it under a header:
+“Small Actions, Real Impact”
+
+Do not overemphasize it visually.
+
+6. Design Guidelines
+- Maintain the Solar Intelligence visual language (dark theme, calm cards, soft highlights).
+- Avoid large decorative illustrations.
+- Prioritize clarity, readable text, and meaningful numbers.
+- This dashboard should feel like a control panel, not a brochure.
+
+Goal:
+Ensure the dashboard immediately communicates:
+1) What EnviroSense does
+2) The user’s current environmental context
+3) The next meaningful action the user can take
