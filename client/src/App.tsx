@@ -10,16 +10,19 @@ import { cn } from "@/lib/utils";
 // Pages
 import Dashboard from "@/pages/Dashboard";
 import PlantRecommendations from "@/pages/PlantRecommendations";
+import YourGarden from "@/pages/YourGarden";
 import SolarCalculator from "@/pages/SolarCalculator";
 import HeatMap from "@/pages/HeatMap";
 import BrandImpact from "@/pages/BrandImpact";
 import NotFound from "@/pages/NotFound";
+import { GardenProvider } from "@/hooks/use-garden";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Dashboard} />
       <Route path="/plants" component={PlantRecommendations} />
+      <Route path="/garden" component={YourGarden} />
       <Route path="/solar" component={SolarCalculator} />
       <Route path="/heat-map" component={HeatMap} />
       <Route path="/brands" component={BrandImpact} />
@@ -43,17 +46,19 @@ function MainContent() {
   );
 }
 
-function App() {
+export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <SidebarProvider>
-          <div className="flex min-h-screen bg-[#0a1a14] text-white font-body selection:bg-primary/20 overflow-x-hidden relative">
-            <FloatingAqiWidget />
-            <Sidebar />
-            <MainContent />
-          </div>
-        </SidebarProvider>
+        <GardenProvider>
+          <SidebarProvider>
+            <div className="flex min-h-screen bg-[#0a1a14] text-white font-body selection:bg-primary/20 overflow-x-hidden relative">
+              <FloatingAqiWidget />
+              <Sidebar />
+              <MainContent />
+            </div>
+          </SidebarProvider>
+        </GardenProvider>
         <Toaster />
       </TooltipProvider>
     </QueryClientProvider>

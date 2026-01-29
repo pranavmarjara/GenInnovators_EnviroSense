@@ -8,13 +8,15 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Loader2, Sprout, Droplets, Sun } from "lucide-react";
+import { Loader2, Sprout, Droplets, Sun, Plus, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
+import { useGarden } from "@/hooks/use-garden";
 
 export default function PlantRecommendations() {
   const { mutate, isPending, data: plants } = usePlantRecommendations();
   const [hasSearched, setHasSearched] = useState(false);
+  const { addToGarden, removeFromGarden, isInGarden } = useGarden();
 
   const form = useForm<GetPlantRecommendationsRequest>({
     resolver: zodResolver(getPlantRecommendationsSchema),
@@ -165,41 +167,78 @@ export default function PlantRecommendations() {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <AnimatePresence>
-              {plants?.map((plant, idx) => (
-                <motion.div
-                  key={plant.id}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: idx * 0.1 }}
-                  className="solar-card solar-gradient-border hover:bg-white/10 transition-all duration-500 hover:-translate-y-2 flex flex-col h-full group"
-                >
-                  <div className="p-5 flex-1 flex flex-col relative z-10">
-                    <div className="mb-4">
-                      <h3 className="font-display font-bold text-xl text-white mb-1 group-hover:text-solar-glow transition-colors">{plant.name}</h3>
-                      <Badge variant="outline" className="bg-black/60 backdrop-blur-md border-white/10 text-white shadow-xl mt-2">
-                        {plant.careIntensity} Care
-                      </Badge>
+              {plants?.map((plant, idx) => {
+                const isSelected = isInGarden(plant.id);
+                return (
+                  <motion.div
+                    key={plant.id}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: idx * 0.1 }}
+                    className="solar-card solar-gradient-border hover:bg-white/10 transition-all duration-500 hover:-translate-y-2 flex flex-col h-full group"
+                  >
+                    <div className="p-5 flex-1 flex flex-col relative z-10">
+                      <div className="flex justify-between items-start mb-4">
+                        <div>
+                          <h3 className="font-display font-bold text-xl text-white mb-1 group-hover:text-solar-glow transition-colors">{plant.name}</h3>
+                          <Badge variant="outline" className="bg-black/60 backdrop-blur-md border-white/10 text-white shadow-xl mt-2">
+                            {plant.careIntensity} Care
+                          </Badge>
+                        </div>
+                        <Button 
+                          size="sm" 
+                          variant={isSelected ? "default" : "outline"}
+                          className={cn(
+                            "rounded-full transition-all duration-300",
+                            isSelected ? "bg-solar-glow text-black" : "border-white/20 text-white/40 hover:text-solar-glow hover:border-solar-glow"
+                          )}
+                          onClick={() => isSelected ? removeFromGarden(plant.id) : addToGarden(plant)}
+                        >
+                          {isSelected ? (
+                            <>
+                              <Check className="w-4 h-4 mr-1" />
+                              Added
+                            </>
+                          ) : (
+                            <>
+                              <Plus className="w-4 h-4 mr-1" />
+                              Add
+                            </>
+                          )}
+                        </Button>
+                      </div>
+                      
+                      <div className="space-y-3 mb-6 flex-1">
+                        <div className="flex items-center gap-2 text-sm text-white/60">
+                          <Sun className="w-4 h-4 text-solar-glow" />
+                          <span className="capitalize">Sunlight: {plant.sunlight}</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-white/60">
+                          <Droplets className="w-4 h-4 text-blue-400" />
+                          <span className="capitalize">Water: {plant.watering}</span>
+                        </div>
+                        <div className="mt-4 p-3 bg-white/5 rounded-lg border border-white/5">
+                          <p className="text-xs font-bold text-solar-glow uppercase tracking-wider mb-1">Medicinal Value</p>
+                          <p className="text-sm text-white/80 leading-relaxed">{plant.medicinalValue}</p>
+                        </div>
+                      </div>
                     </div>
-                    
-                    <div className="space-y-3 mb-6 flex-1">
-                      <div className="flex items-center gap-2 text-sm text-white/60">
-                        <Sun className="w-4 h-4 text-solar-glow" />
-                        <span className="capitalize">Sunlight: {plant.sunlight}</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-sm text-white/60">
-                        <Droplets className="w-4 h-4 text-blue-400" />
-                        <span className="capitalize">Water: {plant.watering}</span>
-                      </div>
-                      <div className="mt-4 p-3 bg-white/5 rounded-lg border border-white/5">
-                        <p className="text-xs font-bold text-solar-glow uppercase tracking-wider mb-1">Medicinal Value</p>
-                        <p className="text-sm text-white/80 leading-relaxed">{plant.medicinalValue}</p>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                );
+              })}
             </AnimatePresence>
           </div>
+          
+          {hasSearched && plants?.length === 0 && (
+            <div className="text-center py-20 text-muted-foreground">
+              No plants found for these criteria. Try adjusting your filters.
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
           
           {hasSearched && plants?.length === 0 && (
             <div className="text-center py-20 text-muted-foreground">
