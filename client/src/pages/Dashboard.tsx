@@ -57,8 +57,67 @@ export default function Dashboard() {
   }, { min: 0, max: 0 });
 
   return (
-    <div className="w-full h-full space-y-12 pb-12">
-      {/* Dashboard Header */}
+    <div className="w-full h-full space-y-12 pb-12 relative min-h-screen">
+      {/* Nature-inspired Atmospheric Background */}
+      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        {/* Base Gradient Layer */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a1a14] via-[#0d261d] to-[#0a1a14]" />
+        
+        {/* Mountain/Forest Silhouettes using SVG and Gradients */}
+        <div className="absolute inset-0 opacity-30">
+          <svg viewBox="0 0 1000 1000" preserveAspectRatio="none" className="w-full h-full">
+            <defs>
+              <linearGradient id="mt-grad-1" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#1a3a2e" stopOpacity="0" />
+                <stop offset="100%" stopColor="#0a1a14" stopOpacity="1" />
+              </linearGradient>
+              <linearGradient id="mt-grad-2" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#2d5a45" stopOpacity="0" />
+                <stop offset="100%" stopColor="#0d261d" stopOpacity="0.8" />
+              </linearGradient>
+            </defs>
+            {/* Distant Mountains */}
+            <path d="M0,600 Q250,450 500,600 T1000,600 V1000 H0 Z" fill="url(#mt-grad-1)" />
+            {/* Midrange Peaks */}
+            <path d="M0,750 Q200,600 400,750 T800,700 T1000,800 V1000 H0 Z" fill="url(#mt-grad-2)" />
+          </svg>
+        </div>
+
+        {/* Subtle Fog/Mist Animation Layers */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <motion.div 
+            animate={{ 
+              x: [-100, 100],
+              opacity: [0.1, 0.2, 0.1]
+            }}
+            transition={{ 
+              duration: 20, 
+              repeat: Infinity, 
+              ease: "linear" 
+            }}
+            className="absolute top-1/4 -left-1/4 w-[150%] h-1/2 bg-gradient-to-r from-transparent via-white/5 to-transparent blur-[100px]"
+          />
+          <motion.div 
+            animate={{ 
+              x: [100, -100],
+              opacity: [0.05, 0.15, 0.05]
+            }}
+            transition={{ 
+              duration: 25, 
+              repeat: Infinity, 
+              ease: "linear" 
+            }}
+            className="absolute bottom-1/4 -right-1/4 w-[150%] h-1/2 bg-gradient-to-r from-transparent via-white/5 to-transparent blur-[120px]"
+          />
+        </div>
+
+        {/* Dark Overlays for Readability */}
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a1a14] via-transparent to-transparent" />
+      </div>
+
+      <div className="relative z-10 space-y-12">
+        {/* Dashboard Header */}
       <header>
         <h1 className="text-4xl md:text-5xl font-display font-bold text-white mb-2 solar-glow-text">
           Your Environmental Snapshot
