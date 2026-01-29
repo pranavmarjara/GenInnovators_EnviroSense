@@ -1,0 +1,61 @@
+Enhance the existing Plant Recommendation dataset by adding additional plants ONLY where necessary to ensure that every combination of sunlight requirement, water frequency, and care intensity returns at least one suitable plant.
+
+IMPORTANT:
+- Do NOT modify, overwrite, or duplicate any plants that already exist in the dataset.
+- Only add new plant entries if a combination would otherwise return no results.
+
+Data Rules:
+Each plant entry must include only the following fields:
+- Plant name
+- Sunlight requirement (Low / Moderate / High)
+- Water frequency (Rare / Moderate / Frequent)
+- Care intensity (Low / Medium / High)
+- Medicinal value (short description)
+
+No images are required.
+
+Add plants strategically to cover edge-case combinations, especially:
+- High care + rare water
+- Low sunlight + frequent water
+- High sunlight + low care
+- Disease-based filters combined with restrictive care or water settings
+
+Suggested Additional Plant Entries (ONLY add if missing):
+
+Low Sunlight:
+- ZZ Plant | Low | Rare | Low | Air purification
+- Spider Plant | Low | Moderate | Low | Respiratory health
+- Peace Lily | Low | Moderate | Medium | Stress relief
+- Areca Palm | Low | Frequent | Medium | Air purification
+
+Moderate Sunlight:
+- Aloe Vera | Moderate | Rare | Low | Skin care and burns
+- Mint | Moderate | Frequent | Medium | Digestion
+- Curry Leaf Plant | Moderate | Moderate | Medium | Digestion
+- Lemongrass | Moderate | Moderate | Medium | Stress relief
+
+High Sunlight:
+- Neem | High | Rare | Low | Antibacterial
+- Marigold | High | Moderate | Low | Anti-inflammatory
+- Hibiscus | High | Frequent | High | Hair and skin health
+- Guava Plant | High | Moderate | Medium | Digestion
+
+High Care + Rare Water Edge Cases:
+- Medicinal Cactus | High | Rare | High | Skin treatment
+- Bonsai (Herbal varieties) | Moderate | Rare | High | Stress relief
+- Jade Plant | Moderate | Rare | Medium | Air purification
+
+Disease-Based Fallback Plants:
+If disease-based filtering results in no matches, ensure the following plants are available as general medicinal fallbacks:
+- Tulsi | Immunity, cold and cough
+- Neem | Skin and antibacterial support
+- Aloe Vera | Skin and digestive support
+- Giloy | Immunity support
+- Mint | Digestion support
+
+Filtering Logic Requirement:
+- Disease-based recommendations may override other filters if necessary to avoid empty results.
+- The system should always prioritize returning at least one informative plant recommendation.
+
+Goal:
+Ensure the plant recommendation system never returns an empty result set and always guides the user with meaningful, relevant plant options while preserving all existing plant data.
