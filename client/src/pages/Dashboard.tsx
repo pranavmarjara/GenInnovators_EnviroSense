@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useGarden } from "@/hooks/use-garden";
-import { useSidebar } from "@/components/Sidebar";
 import { useMemo } from "react";
 
 const DAILY_TIPS = [
@@ -118,151 +117,152 @@ export default function Dashboard() {
 
       <div className="relative z-10 space-y-12">
         {/* Dashboard Header */}
-      <header>
-        <h1 className="text-4xl md:text-5xl font-display font-bold text-white mb-2 solar-glow-text">
-          Your Environmental Snapshot
-        </h1>
-        <p className="text-white/40 text-lg">
-          Based on your location and current selections
-        </p>
-      </header>
+        <header>
+          <h1 className="text-4xl md:text-5xl font-display font-bold text-white mb-2 solar-glow-text">
+            Your Environmental Snapshot
+          </h1>
+          <p className="text-white/40 text-lg">
+            Based on your location and current selections
+          </p>
+        </header>
 
-      {/* Today's Environment Section */}
-      <section>
-        <Card className="solar-card solar-gradient-border border-none bg-white/5 backdrop-blur-md overflow-hidden p-8">
-          <CardHeader className="p-0 mb-6">
-            <CardTitle className="text-2xl font-display font-bold text-white flex items-center gap-3">
-              <div className="p-2 rounded-lg bg-solar-glow/20">
-                <Wind className="w-6 h-6 text-solar-glow" />
+        {/* Today's Environment Section */}
+        <section>
+          <Card className="solar-card solar-gradient-border border-none bg-white/5 backdrop-blur-md overflow-hidden p-8">
+            <CardHeader className="p-0 mb-6">
+              <CardTitle className="text-2xl font-display font-bold text-white flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-solar-glow/20">
+                  <Wind className="w-6 h-6 text-solar-glow" />
+                </div>
+                Today's Environment
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-0">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div className="space-y-1">
+                  <p className="text-xs text-white/40 uppercase tracking-wider font-bold">Air Quality Index</p>
+                  <p className="text-3xl font-display font-bold text-solar-glow">75 <span className="text-sm text-white/60">Moderate</span></p>
+                </div>
+                <div className="space-y-1">
+                  <p className="text-xs text-white/40 uppercase tracking-wider font-bold">Estimated CO₂ Offset</p>
+                  <p className="text-3xl font-display font-bold text-white">1.2 <span className="text-sm text-white/60">tons/year</span></p>
+                </div>
+                <div className="space-y-1">
+                  <p className="text-xs text-white/40 uppercase tracking-wider font-bold">Local Humidity</p>
+                  <p className="text-3xl font-display font-bold text-white">65%</p>
+                </div>
               </div>
-              Today's Environment
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="p-0">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-              <div className="space-y-1">
-                <p className="text-xs text-white/40 uppercase tracking-wider font-bold">Air Quality Index</p>
-                <p className="text-3xl font-display font-bold text-solar-glow">75 <span className="text-sm text-white/60">Moderate</span></p>
+              <div className="flex items-center gap-3 pt-6 border-t border-white/5">
+                <Info className="w-4 h-4 text-solar-glow" />
+                <p className="text-white/70">Conditions today are favorable for outdoor activity and solar generation.</p>
               </div>
-              <div className="space-y-1">
-                <p className="text-xs text-white/40 uppercase tracking-wider font-bold">Estimated CO₂ Offset</p>
-                <p className="text-3xl font-display font-bold text-white">1.2 <span className="text-sm text-white/60">tons/year</span></p>
-              </div>
-              <div className="space-y-1">
-                <p className="text-xs text-white/40 uppercase tracking-wider font-bold">Local Humidity</p>
-                <p className="text-3xl font-display font-bold text-white">65%</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 pt-6 border-t border-white/5">
-              <Info className="w-4 h-4 text-solar-glow" />
-              <p className="text-white/70">Conditions today are favorable for outdoor activity and solar generation.</p>
-            </div>
-          </CardContent>
-        </Card>
-      </section>
+            </CardContent>
+          </Card>
+        </section>
 
-      {/* Core Action Summary Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {/* Solar Status */}
-        <Card className="solar-card solar-gradient-border border-none bg-white/5 hover-elevate group">
-          <CardHeader className="pb-4">
-            <div className="p-3 rounded-xl bg-solar-glow/10 w-fit mb-4 group-hover:bg-solar-glow group-hover:text-black transition-colors">
-              <Sun className="w-6 h-6 text-solar-glow group-hover:text-inherit" />
-            </div>
-            <CardTitle className="text-xl text-white">Solar Intelligence</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="space-y-2">
-              <p className="text-sm text-white/60 leading-relaxed">Solar installation is recommended for your region</p>
-              <p className="text-lg font-bold text-solar-glow">Estimated energy offset: ~70–80%</p>
-            </div>
-            <Link href="/solar">
-              <Button className="w-full bg-white/5 border border-white/10 hover:border-solar-glow/50 text-white hover:text-solar-glow rounded-xl font-bold py-6 h-auto transition-all">
-                View Solar Intelligence
-              </Button>
-            </Link>
-          </CardContent>
-        </Card>
-
-        {/* Your Garden */}
-        <Card className="solar-card solar-gradient-border border-none bg-white/5 hover-elevate group">
-          <CardHeader className="pb-4">
-            <div className="p-3 rounded-xl bg-solar-glow/10 w-fit mb-4 group-hover:bg-solar-glow group-hover:text-black transition-colors">
-              <Sprout className="w-6 h-6 text-solar-glow group-hover:text-inherit" />
-            </div>
-            <CardTitle className="text-xl text-white">Your Garden</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="space-y-2">
-              <p className="text-sm text-white/60 leading-relaxed">Plants selected: {garden.length}</p>
-              <p className="text-lg font-bold text-solar-glow">
-                CO₂ absorption: ~{totalImpact.min}–{totalImpact.max} <span className="text-sm">kg/year</span>
-              </p>
-            </div>
-            <Link href="/garden">
-              <Button className="w-full bg-white/5 border border-white/10 hover:border-solar-glow/50 text-white hover:text-solar-glow rounded-xl font-bold py-6 h-auto transition-all">
-                View Your Garden
-              </Button>
-            </Link>
-          </CardContent>
-        </Card>
-
-        {/* Green Credits */}
-        <Card className="solar-card solar-gradient-border border-none bg-white/5 hover-elevate group">
-          <CardHeader className="pb-4">
-            <div className="p-3 rounded-xl bg-solar-glow/10 w-fit mb-4 group-hover:bg-solar-glow group-hover:text-black transition-colors">
-              <ShieldCheck className="w-6 h-6 text-solar-glow group-hover:text-inherit" />
-            </div>
-            <CardTitle className="text-xl text-white">Green Credits Awareness</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="space-y-2">
-              <p className="text-sm text-white/60 leading-relaxed">Eligible environmental actions identified</p>
-              <p className="text-lg font-bold text-solar-glow">Learn how citizens can participate</p>
-            </div>
-            <Link href="/green-credits">
-              <Button className="w-full bg-white/5 border border-white/10 hover:border-solar-glow/50 text-white hover:text-solar-glow rounded-xl font-bold py-6 h-auto transition-all">
-                Explore Green Credits
-              </Button>
-            </Link>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* What You Can Do Next Section */}
-      <section className="space-y-6">
-        <h3 className="text-2xl font-display font-bold text-white flex items-center gap-3 px-2">
-          What You Can Do Next
-        </h3>
-        <div className="grid grid-cols-1 gap-4 px-2">
-          {[
-            { label: "Check if solar is worth it for your home", href: "/solar" },
-            { label: "Choose plants suited to your lifestyle", href: "/plants" },
-            { label: "Understand how Green Credits work", href: "/green-credits" }
-          ].map((item, i) => (
-            <Link key={i} href={item.href}>
-              <div className="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/5 hover:border-solar-glow/20 hover:bg-white/10 transition-all cursor-pointer group">
-                <span className="text-white/70 group-hover:text-white transition-colors">{item.label}</span>
-                <ArrowRight className="w-4 h-4 text-white/20 group-hover:text-solar-glow transition-all group-hover:translate-x-1" />
+        {/* Core Action Summary Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Solar Status */}
+          <Card className="solar-card solar-gradient-border border-none bg-white/5 hover-elevate group">
+            <CardHeader className="pb-4">
+              <div className="p-3 rounded-xl bg-solar-glow/10 w-fit mb-4 group-hover:bg-solar-glow group-hover:text-black transition-colors">
+                <Sun className="w-6 h-6 text-solar-glow group-hover:text-inherit" />
               </div>
-            </Link>
-          ))}
+              <CardTitle className="text-xl text-white">Solar Intelligence</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="space-y-2">
+                <p className="text-sm text-white/60 leading-relaxed">Solar installation is recommended for your region</p>
+                <p className="text-lg font-bold text-solar-glow">Estimated energy offset: ~70–80%</p>
+              </div>
+              <Link href="/solar">
+                <Button className="w-full bg-white/5 border border-white/10 hover:border-solar-glow/50 text-white hover:text-solar-glow rounded-xl font-bold py-6 h-auto transition-all">
+                  View Solar Intelligence
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
+
+          {/* Your Garden */}
+          <Card className="solar-card solar-gradient-border border-none bg-white/5 hover-elevate group">
+            <CardHeader className="pb-4">
+              <div className="p-3 rounded-xl bg-solar-glow/10 w-fit mb-4 group-hover:bg-solar-glow group-hover:text-black transition-colors">
+                <Sprout className="w-6 h-6 text-solar-glow group-hover:text-inherit" />
+              </div>
+              <CardTitle className="text-xl text-white">Your Garden</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="space-y-2">
+                <p className="text-sm text-white/60 leading-relaxed">Plants selected: {garden.length}</p>
+                <p className="text-lg font-bold text-solar-glow">
+                  CO₂ absorption: ~{totalImpact.min}–{totalImpact.max} <span className="text-sm">kg/year</span>
+                </p>
+              </div>
+              <Link href="/garden">
+                <Button className="w-full bg-white/5 border border-white/10 hover:border-solar-glow/50 text-white hover:text-solar-glow rounded-xl font-bold py-6 h-auto transition-all">
+                  View Your Garden
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
+
+          {/* Green Credits */}
+          <Card className="solar-card solar-gradient-border border-none bg-white/5 hover-elevate group">
+            <CardHeader className="pb-4">
+              <div className="p-3 rounded-xl bg-solar-glow/10 w-fit mb-4 group-hover:bg-solar-glow group-hover:text-black transition-colors">
+                <ShieldCheck className="w-6 h-6 text-solar-glow group-hover:text-inherit" />
+              </div>
+              <CardTitle className="text-xl text-white">Green Credits Awareness</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="space-y-2">
+                <p className="text-sm text-white/60 leading-relaxed">Eligible environmental actions identified</p>
+                <p className="text-lg font-bold text-solar-glow">Learn how citizens can participate</p>
+              </div>
+              <Link href="/green-credits">
+                <Button className="w-full bg-white/5 border border-white/10 hover:border-solar-glow/50 text-white hover:text-solar-glow rounded-xl font-bold py-6 h-auto transition-all">
+                  Explore Green Credits
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
         </div>
-      </section>
 
-      {/* Small Actions Section (Daily Tip) */}
-      <section className="pt-12 border-t border-white/5">
-        <h3 className="text-sm font-bold text-solar-glow uppercase tracking-[0.3em] mb-6 px-2">
-          Small Actions, Real Impact
-        </h3>
-        <div className="mx-2 p-6 rounded-2xl bg-white/5 border border-white/5 relative overflow-hidden group">
-          <div className="absolute inset-0 bg-gradient-to-br from-solar-glow/5 to-transparent opacity-50" />
-          <div className="relative z-10 flex gap-4 items-start">
-            <Star className="w-5 h-5 text-solar-glow shrink-0 mt-0.5" />
-            <p className="text-white/60 leading-relaxed italic italic">"{dailyTip}"</p>
+        {/* What You Can Do Next Section */}
+        <section className="space-y-6">
+          <h3 className="text-2xl font-display font-bold text-white flex items-center gap-3 px-2">
+            What You Can Do Next
+          </h3>
+          <div className="grid grid-cols-1 gap-4 px-2">
+            {[
+              { label: "Check if solar is worth it for your home", href: "/solar" },
+              { label: "Choose plants suited to your lifestyle", href: "/plants" },
+              { label: "Understand how Green Credits work", href: "/green-credits" }
+            ].map((item, i) => (
+              <Link key={i} href={item.href}>
+                <div className="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/5 hover:border-solar-glow/20 hover:bg-white/10 transition-all cursor-pointer group">
+                  <span className="text-white/70 group-hover:text-white transition-colors">{item.label}</span>
+                  <ArrowRight className="w-4 h-4 text-white/20 group-hover:text-solar-glow transition-all group-hover:translate-x-1" />
+                </div>
+              </Link>
+            ))}
           </div>
-        </div>
-      </section>
+        </section>
+
+        {/* Small Actions Section (Daily Tip) */}
+        <section className="pt-12 border-t border-white/5">
+          <h3 className="text-sm font-bold text-solar-glow uppercase tracking-[0.3em] mb-6 px-2">
+            Small Actions, Real Impact
+          </h3>
+          <div className="mx-2 p-6 rounded-2xl bg-white/5 border border-white/5 relative overflow-hidden group">
+            <div className="absolute inset-0 bg-gradient-to-br from-solar-glow/5 to-transparent opacity-50" />
+            <div className="relative z-10 flex gap-4 items-start">
+              <Star className="w-5 h-5 text-solar-glow shrink-0 mt-0.5" />
+              <p className="text-white/60 leading-relaxed italic italic">"{dailyTip}"</p>
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }
