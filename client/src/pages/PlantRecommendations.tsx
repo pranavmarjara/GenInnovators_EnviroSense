@@ -32,11 +32,11 @@ export default function PlantRecommendations() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto p-6">
       <PageHeader 
         title="Plant Recommendations" 
         description="Discover the perfect plants for your environment based on sunlight, water, and care requirements."
-        className="solar-glow-text"
+        className="solar-glow-text mb-8"
       />
 
       <div className="grid lg:grid-cols-4 gap-8">
@@ -200,17 +200,6 @@ export default function PlantRecommendations() {
               ))}
             </AnimatePresence>
           </div>
-          
-          {hasSearched && plants?.length === 0 && (
-            <div className="text-center py-20 text-muted-foreground">
-              No plants found for these criteria. Try adjusting your filters.
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}
           
           {hasSearched && plants?.length === 0 && (
             <div className="text-center py-20 text-muted-foreground">

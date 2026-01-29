@@ -1,5 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import { api, type GetPlantRecommendationsRequest } from "@shared/routes";
+import { api } from "@shared/routes";
+import type { GetPlantRecommendationsRequest } from "@shared/schema";
 
 export function usePlantRecommendations() {
   return useMutation({
