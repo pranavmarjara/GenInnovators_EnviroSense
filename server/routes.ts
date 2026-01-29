@@ -11,7 +11,7 @@ export async function registerRoutes(
   
   // AQI
   app.get(api.aqi.get.path, async (req, res) => {
-    const zip = req.params.zip;
+    const zip = req.params.zip as string;
     if (!zip) return res.status(400).json({ message: "Zip code required" });
     const data = await storage.getAqi(zip);
     res.json(data);
@@ -24,7 +24,8 @@ export async function registerRoutes(
       const data = await storage.getPlantRecommendations(input);
       res.json(data);
     } catch (error) {
-       res.status(400).json({ message: "Invalid Input" });
+      console.error("Plant recommendation error:", error);
+      res.status(400).json({ message: "Invalid Input" });
     }
   });
 
@@ -41,7 +42,7 @@ export async function registerRoutes(
 
   // Brands
   app.get(api.brands.get.path, async (req, res) => {
-    const name = req.params.name;
+    const name = req.params.name as string;
     const data = await storage.getBrandScore(name);
     res.json(data);
   });

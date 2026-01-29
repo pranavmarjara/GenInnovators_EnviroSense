@@ -17,12 +17,11 @@ export const aqiData = pgTable("aqi_data", {
 export const plants = pgTable("plants", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
-  type: text("type").notNull(), // medicinal, healthy, environmental
-  careLevel: text("care_level").notNull(), // Low, Medium, High
-  sunlight: text("sunlight").notNull(),
-  watering: text("watering").notNull(),
-  image: text("image"),
-  tags: text("tags").array(), // For filtering by disease/condition
+  sunlight: text("sunlight").notNull(), // low, moderate, high
+  watering: text("watering").notNull(), // rare, moderate, frequent
+  careIntensity: text("care_intensity").notNull(), // easy, moderate, high
+  medicinalValue: text("medicinal_value").notNull(),
+  diseaseTags: text("disease_tags").array(), // For filtering by disease
 });
 
 // === Brand Scores ===
@@ -54,8 +53,9 @@ export type GetAqiRequest = z.infer<typeof getAqiSchema>;
 
 // Plants
 export const getPlantRecommendationsSchema = z.object({
-  zip: z.string().optional(),
-  weather: z.enum(["hot", "moderate", "cold"]),
+  sunlight: z.enum(["low", "moderate", "high"]).optional(),
+  watering: z.enum(["rare", "moderate", "frequent"]).optional(),
+  careIntensity: z.enum(["easy", "moderate", "high"]).optional(),
   disease: z.string().optional(),
 });
 export type GetPlantRecommendationsRequest = z.infer<typeof getPlantRecommendationsSchema>;

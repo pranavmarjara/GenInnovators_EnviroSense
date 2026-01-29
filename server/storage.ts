@@ -15,44 +15,34 @@ export class MemStorage implements IStorage {
   private mockPlants: Plant[];
 
   constructor() {
-    // Seed some mock plants
     this.mockPlants = [
-      {
-        id: 1, name: "Aloe Vera", type: "medicinal", careLevel: "Low",
-        sunlight: "Direct", watering: "Infrequent",
-        image: "https://images.unsplash.com/photo-1596547609652-9cf5d8d76921",
-        tags: ["skin", "burns", "indoor"]
-      },
-      {
-        id: 2, name: "Snake Plant", type: "environmental", careLevel: "Low",
-        sunlight: "Low/Indirect", watering: "Infrequent",
-        image: "https://images.unsplash.com/photo-1599598425947-d35279b9b48c",
-        tags: ["air-purifier", "indoor"]
-      },
-      {
-        id: 3, name: "Basil", type: "healthy", careLevel: "Medium",
-        sunlight: "Direct", watering: "Regular",
-        image: "https://images.unsplash.com/photo-1618375569909-3c8616cf7733",
-        tags: ["cooking", "digestion"]
-      },
-      {
-        id: 4, name: "Lavender", type: "medicinal", careLevel: "Medium",
-        sunlight: "Direct", watering: "Moderate",
-        image: "https://images.unsplash.com/photo-1498579809087-ef1e558fd1da",
-        tags: ["sleep", "stress", "calming"]
-      },
-      {
-        id: 5, name: "Spider Plant", type: "environmental", careLevel: "Low",
-        sunlight: "Indirect", watering: "Moderate",
-        image: "https://images.unsplash.com/photo-1572688484205-a14a90c92215",
-        tags: ["air-purifier", "beginner"]
-      },
-      {
-        id: 6, name: "Mint", type: "healthy", careLevel: "Low",
-        sunlight: "Partial", watering: "Frequent",
-        image: "https://images.unsplash.com/photo-1603569283847-aa295f0d016a",
-        tags: ["digestion", "tea"]
-      }
+      // Low Sunlight
+      { id: 1, name: "Snake Plant", sunlight: "low", watering: "rare", careIntensity: "easy", medicinalValue: "Air purification", diseaseTags: ["headache", "respiratory"] },
+      { id: 2, name: "Peace Lily", sunlight: "low", watering: "moderate", careIntensity: "moderate", medicinalValue: "General well-being", diseaseTags: ["stress", "anxiety"] },
+      { id: 3, name: "ZZ Plant", sunlight: "low", watering: "rare", careIntensity: "easy", medicinalValue: "General well-being", diseaseTags: [] },
+      { id: 4, name: "Cast Iron Plant", sunlight: "low", watering: "moderate", careIntensity: "easy", medicinalValue: "General well-being", diseaseTags: [] },
+      { id: 5, name: "Pothos", sunlight: "low", watering: "moderate", careIntensity: "easy", medicinalValue: "Air purification", diseaseTags: [] },
+
+      // Moderate Sunlight
+      { id: 6, name: "Aloe Vera", sunlight: "moderate", watering: "rare", careIntensity: "easy", medicinalValue: "Skin burns and digestion", diseaseTags: ["skin", "digestion"] },
+      { id: 7, name: "Basil", sunlight: "moderate", watering: "frequent", careIntensity: "moderate", medicinalValue: "Anti-inflammatory", diseaseTags: ["inflammation", "digestion"] },
+      { id: 8, name: "Spider Plant", sunlight: "moderate", watering: "moderate", careIntensity: "easy", medicinalValue: "Air purification", diseaseTags: [] },
+      { id: 9, name: "Mint", sunlight: "moderate", watering: "frequent", careIntensity: "easy", medicinalValue: "Digestion and freshness", diseaseTags: ["digestion", "nausea"] },
+      { id: 10, name: "Jade Plant", sunlight: "moderate", watering: "rare", careIntensity: "moderate", medicinalValue: "General well-being", diseaseTags: [] },
+
+      // High Sunlight
+      { id: 11, name: "Marigold", sunlight: "high", watering: "moderate", careIntensity: "easy", medicinalValue: "Antiseptic properties", diseaseTags: ["skin", "wounds"] },
+      { id: 12, name: "Hibiscus", sunlight: "high", watering: "frequent", careIntensity: "moderate", medicinalValue: "Blood pressure regulation", diseaseTags: ["hypertension"] },
+      { id: 13, name: "Tulsi (Holy Basil)", sunlight: "high", watering: "frequent", careIntensity: "moderate", medicinalValue: "Immunity and respiratory health", diseaseTags: ["cold", "cough", "flu"] },
+      { id: 14, name: "Rosemary", sunlight: "high", watering: "moderate", careIntensity: "moderate", medicinalValue: "Memory and concentration", diseaseTags: ["memory", "stress"] },
+      { id: 15, name: "Lavender", sunlight: "high", watering: "rare", careIntensity: "moderate", medicinalValue: "Sleep and relaxation", diseaseTags: ["insomnia", "stress"] },
+
+      // Additional for categories
+      { id: 16, name: "Dracaena", sunlight: "low", watering: "moderate", careIntensity: "moderate", medicinalValue: "General well-being", diseaseTags: [] },
+      { id: 17, name: "Rubber Plant", sunlight: "moderate", watering: "moderate", careIntensity: "easy", medicinalValue: "Air purification", diseaseTags: [] },
+      { id: 18, name: "Sunflowers", sunlight: "high", watering: "frequent", careIntensity: "easy", medicinalValue: "Nutritional seeds", diseaseTags: [] },
+      { id: 19, name: "Oregano", sunlight: "high", watering: "moderate", careIntensity: "easy", medicinalValue: "Antioxidant", diseaseTags: ["cold", "infection"] },
+      { id: 20, name: "Lemon Balm", sunlight: "moderate", watering: "frequent", careIntensity: "easy", medicinalValue: "Anxiety relief", diseaseTags: ["anxiety", "insomnia"] }
     ];
   }
 
@@ -84,21 +74,25 @@ export class MemStorage implements IStorage {
   }
 
   async getPlantRecommendations(filters: GetPlantRecommendationsRequest): Promise<Plant[]> {
-    // Simple mock filtering
     let results = [...this.mockPlants];
 
-    if (filters.disease) {
-      // If disease is entered, prioritize medicinal
-      const medicinal = results.filter(p => p.type === "medicinal");
-      const others = results.filter(p => p.type !== "medicinal");
-      results = [...medicinal, ...others];
-    } else {
-      // Basic healthy recommendation
-      // Keep all, maybe sort by care level
+    if (filters.sunlight) {
+      results = results.filter(p => p.sunlight === filters.sunlight);
     }
-    
-    // In a real app, we'd use weather to filter sunlight/watering, 
-    // but for mock data we just return the static list primarily.
+    if (filters.watering) {
+      results = results.filter(p => p.watering === filters.watering);
+    }
+    if (filters.careIntensity) {
+      results = results.filter(p => p.careIntensity === filters.careIntensity);
+    }
+    if (filters.disease) {
+      const diseaseLower = filters.disease.toLowerCase();
+      results = results.filter(p => 
+        p.diseaseTags?.some(tag => tag.toLowerCase().includes(diseaseLower)) ||
+        p.medicinalValue.toLowerCase().includes(diseaseLower)
+      );
+    }
+
     return results;
   }
 
