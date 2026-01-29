@@ -1,0 +1,72 @@
+Add a new section to the application called “Green Credits”.
+
+Context:
+Green Credits are part of the Government of India’s Green Credit Programme launched in 2023 to incentivize verified environmental actions by individuals and communities. This section is strictly for awareness and guidance and must NOT issue, trade, predict value, or guarantee Green Credits.
+
+Purpose:
+Help users understand the real, official process to participate in the Green Credit Programme and the types of environmental actions that may qualify, based on publicly available government guidelines.
+
+Section Structure:
+
+1. What are Green Credits?
+Display a short explanation:
+“Green Credits are a government-backed incentive mechanism introduced in India to recognize and encourage verified environmental actions such as tree plantation, water conservation, and waste management.”
+
+Keep the tone informational and non-financial.
+
+2. Step-by-Step: How Green Credits Are Earned (Awareness Flow)
+Display the following steps clearly as a numbered guide:
+
+Step 1: Register the Activity  
+- Individuals or groups must register their proposed environmental activity on the official Green Credit Programme portal.  
+- The activity is logged for tracking and verification.
+
+Step 2: Choose an Eligible Environmental Action  
+Show a list of eligible action categories:
+- Tree plantation and afforestation  
+- Water conservation and watershed activities  
+- Waste management and recycling initiatives  
+- Sustainable agriculture and land-use practices  
+- Air pollution reduction activities  
+- Mangrove conservation and restoration  
+
+Mark these as “indicative categories based on government guidelines”.
+
+Step 3: Perform the Environmental Action  
+- The registered activity must be carried out in the real world.  
+- Actions should be measurable, documented, and verifiable.
+
+Example (Tree Plantation):
+“Plantation of native trees on owned or permitted land (for example, 20 trees), along with basic documentation and a survival plan.”
+
+Step 4: Verification by Designated Authority  
+- Completed activities are verified by the designated authority or agency under the Green Credit Programme.  
+- Credits are issued only after successful verification.
+
+Step 5: Issuance and Registry  
+- Verified Green Credits are recorded in an official digital registry managed by the programme administrator.  
+- Credits are tracked for transparency and accountability.
+
+3. How EnviroSense Supports This Process
+Display a clearly separated section stating:
+“EnviroSense does not generate, issue, or trade Green Credits. The platform helps users understand eligibility, identify suitable environmental actions for their location, and prepare for participation in government-recognized sustainability initiatives.”
+
+4. Connection With Existing App Features
+Explain how current modules assist awareness:
+- Plant recommendations help users choose region-appropriate trees for plantation-based actions.
+- ‘Your Garden’ helps users plan and organize tree plantation efforts.
+- Solar Intelligence promotes renewable energy awareness as part of sustainability goals.
+- AQI and Heat insights explain the local environmental need for such actions.
+
+5. Disclaimer (Mandatory)
+Add a disclaimer at the bottom:
+“Eligibility criteria, verification processes, and credit allocation are governed by official government rules and may evolve over time. Users should refer to official government sources for the latest information.”
+
+UI & Design Rules:
+- Follow the Solar Intelligence design language.
+- Use clean cards and readable text.
+- No currency symbols, no charts, no wallets.
+- Avoid words like ‘investment’, ‘profit’, ‘trading’, or ‘returns’.
+
+Goal:
+Position EnviroSense as an educational and decision-support platform that translates a new government sustainability initiative into clear, understandable steps for citizens.

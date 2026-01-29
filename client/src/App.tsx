@@ -12,6 +12,7 @@ import Dashboard from "@/pages/Dashboard";
 import PlantRecommendations from "@/pages/PlantRecommendations";
 import YourGarden from "@/pages/YourGarden";
 import SolarCalculator from "@/pages/SolarCalculator";
+import GreenCredits from "@/pages/GreenCredits";
 import NotFound from "@/pages/NotFound";
 import { GardenProvider } from "@/hooks/use-garden";
 
@@ -22,6 +23,7 @@ function Router() {
       <Route path="/plants" component={PlantRecommendations} />
       <Route path="/garden" component={YourGarden} />
       <Route path="/solar" component={SolarCalculator} />
+      <Route path="/green-credits" component={GreenCredits} />
       <Route component={NotFound} />
     </Switch>
   );

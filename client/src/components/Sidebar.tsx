@@ -6,7 +6,8 @@ import {
   Menu,
   Search,
   Sprout,
-  ChevronDown
+  ChevronDown,
+  ShieldCheck
 } from "lucide-react";
 import { useState, useMemo, createContext, useContext } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -30,6 +31,7 @@ const NAV_ITEMS = [
     ]
   },
   { href: "/solar", label: "Solar Calc", icon: SunMedium },
+  { href: "/green-credits", label: "Green Credits", icon: ShieldCheck },
 ];
 
 const DAILY_TIPS = [
