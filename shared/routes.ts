@@ -3,10 +3,8 @@ import {
   getAqiSchema, 
   getPlantRecommendationsSchema, 
   calculateSolarSchema, 
-  getBrandScoreSchema,
   aqiData,
-  plants,
-  brands
+  plants
 } from './schema';
 
 export const errorSchemas = {
@@ -54,16 +52,6 @@ export const api = {
           panels: z.number().optional(),
           summary: z.string(),
         }),
-      },
-    },
-  },
-  brands: {
-    get: {
-      method: 'GET' as const,
-      path: '/api/brands/:name',
-      responses: {
-        200: z.custom<typeof brands.$inferSelect>(),
-        404: errorSchemas.notFound,
       },
     },
   },

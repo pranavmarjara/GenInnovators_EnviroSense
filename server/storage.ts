@@ -1,6 +1,6 @@
 import { 
-  aqiData, plants, brands,
-  type AqiData, type Plant, type Brand,
+  aqiData, plants,
+  type AqiData, type Plant,
   type GetPlantRecommendationsRequest, type SolarResult, type CalculateSolarRequest
 } from "@shared/schema";
 
@@ -8,7 +8,6 @@ export interface IStorage {
   getAqi(zip: string): Promise<AqiData>;
   getPlantRecommendations(filters: GetPlantRecommendationsRequest): Promise<Plant[]>;
   calculateSolar(params: CalculateSolarRequest): Promise<SolarResult>;
-  getBrandScore(name: string): Promise<Brand>;
 }
 
 export class MemStorage implements IStorage {
@@ -121,30 +120,6 @@ export class MemStorage implements IStorage {
     };
   }
 
-  async getBrandScore(name: string): Promise<Brand> {
-    // Mock logic: hash the name to get a consistent score
-    let hash = 0;
-    for (let i = 0; i < name.length; i++) {
-      hash = name.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    const score = Math.abs(hash % 100);
-    
-    let ecoRating = "Low";
-    if (score > 70) ecoRating = "High";
-    else if (score > 40) ecoRating = "Medium";
-
-    let packagingImpact = "High";
-    if (score > 70) packagingImpact = "Low";
-    else if (score > 40) packagingImpact = "Moderate";
-
-    return {
-      id: 1,
-      name,
-      score,
-      ecoRating,
-      packagingImpact
-    };
-  }
 }
 
 export const storage = new MemStorage();

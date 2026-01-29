@@ -3,7 +3,6 @@ import {
   LayoutDashboard, 
   Leaf, 
   SunMedium, 
-  ShoppingBag, 
   Menu,
   Search,
   Sprout,
@@ -31,7 +30,6 @@ const NAV_ITEMS = [
     ]
   },
   { href: "/solar", label: "Solar Calc", icon: SunMedium },
-  { href: "/brands", label: "Brand Impact", icon: ShoppingBag },
 ];
 
 const DAILY_TIPS = [

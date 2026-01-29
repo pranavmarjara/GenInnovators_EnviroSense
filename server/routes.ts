@@ -40,12 +40,5 @@ export async function registerRoutes(
     }
   });
 
-  // Brands
-  app.get(api.brands.get.path, async (req, res) => {
-    const name = req.params.name as string;
-    const data = await storage.getBrandScore(name);
-    res.json(data);
-  });
-
   return httpServer;
 }

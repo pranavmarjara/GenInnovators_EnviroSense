@@ -24,24 +24,13 @@ export const plants = pgTable("plants", {
   diseaseTags: text("disease_tags").array(), // For filtering by disease
 });
 
-// === Brand Scores ===
-export const brands = pgTable("brands", {
-  id: serial("id").primaryKey(),
-  name: text("name").notNull(),
-  score: integer("score").notNull(),
-  packagingImpact: text("packaging_impact").notNull(),
-  ecoRating: text("eco_rating").notNull(), // Low, Medium, High
-});
-
 // === Schemas ===
 export const insertAqiSchema = createInsertSchema(aqiData);
 export const insertPlantSchema = createInsertSchema(plants);
-export const insertBrandSchema = createInsertSchema(brands);
 
 // === Type Exports ===
 export type AqiData = typeof aqiData.$inferSelect;
 export type Plant = typeof plants.$inferSelect;
-export type Brand = typeof brands.$inferSelect;
 
 // === API Request/Response Types ===
 
@@ -73,8 +62,3 @@ export type SolarResult = {
   summary: string;
 };
 
-// Brand
-export const getBrandScoreSchema = z.object({
-  name: z.string(),
-});
-export type GetBrandScoreRequest = z.infer<typeof getBrandScoreSchema>;
