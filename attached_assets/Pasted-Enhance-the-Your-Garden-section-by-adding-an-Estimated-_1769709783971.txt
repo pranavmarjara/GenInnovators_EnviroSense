@@ -1,0 +1,46 @@
+Enhance the “Your Garden” section by adding an Estimated Environmental Impact summary based on the plants selected by the user.
+
+Purpose:
+This feature is for awareness and educational insight only. It provides approximate estimates to help users understand the positive environmental contribution of their selected plants. It must NOT claim scientific precision.
+
+Core Functionality:
+
+1. Per-Plant Impact Data (Approximate)
+For each plant in the dataset, associate approximate annual impact values:
+- Estimated CO₂ absorption range (kg/year)
+- Estimated oxygen contribution (relative units, not exact liters)
+
+These values should be based on general plant size categories (small herb, medium plant, tree) and must be treated as indicative estimates.
+
+2. Garden Impact Summary (Main Feature)
+In the “Your Garden” page, display a summary card titled:
+“Estimated Environmental Impact”
+
+Show aggregated values based on selected plants:
+- Total estimated CO₂ absorbed per year (display as a range, e.g. “~25–40 kg/year”)
+- Total estimated oxygen contribution (use descriptive equivalents, e.g. “equivalent to the annual oxygen needs of ~2 people”)
+
+Avoid exact numbers. Use approximate language (~, about, equivalent to).
+
+3. Explanation Block (Mandatory)
+Include a short explanation below the numbers:
+“These values are approximate estimates intended to help users understand the positive environmental impact of their garden. Actual environmental impact varies based on plant age, health, climate, and care.”
+
+4. Interaction Rules
+- Impact values should update dynamically as plants are added or removed from “Your Garden”.
+- Calculations should be done client-side using simple additive logic.
+- No charts are required; focus on readable text and clarity.
+
+5. Design Guidelines
+- Follow the Solar Intelligence design language.
+- Use calm, informative visuals.
+- Do not gamify or rank users.
+- No images required.
+
+6. Restrictions
+- Do NOT claim scientific accuracy.
+- Do NOT reference carbon markets or credit trading.
+- Do NOT show precise decimal values.
+
+Goal:
+Transform “Your Garden” from a simple list into an awareness-driven impact summary that helps users understand how small planting decisions contribute positively to the environment.

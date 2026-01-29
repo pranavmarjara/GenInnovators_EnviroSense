@@ -3,19 +3,86 @@ import { useGarden } from "@/hooks/use-garden";
 import { motion, AnimatePresence } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Sun, Droplets, Trash2, Sprout } from "lucide-react";
+import { Sun, Droplets, Trash2, Sprout, Info, Wind, Waves } from "lucide-react";
 import { Link } from "wouter";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+// Approximate impact data based on general plant categories
+// Small herb: 1-5kg CO2, 1 person O2 relative
+// Medium plant: 5-15kg CO2, 2 people O2 relative
+// Tree: 20-40kg CO2, 4+ people O2 relative
+const getImpactData = (name: string) => {
+  const n = name.toLowerCase();
+  if (n.includes('tree') || n.includes('neem') || n.includes('banyan') || n.includes('peepal')) {
+    return { co2: [20, 40], oxygen: 4 };
+  }
+  if (n.includes('shrub') || n.includes('hibiscus') || n.includes('rose') || n.includes('aloe')) {
+    return { co2: [5, 15], oxygen: 2 };
+  }
+  return { co2: [1, 5], oxygen: 1 };
+};
 
 export default function YourGarden() {
   const { garden, removeFromGarden } = useGarden();
 
+  const totalImpact = garden.reduce((acc, plant) => {
+    const impact = getImpactData(plant.name);
+    return {
+      co2Min: acc.co2Min + impact.co2[0],
+      co2Max: acc.co2Max + impact.co2[1],
+      oxygen: acc.oxygen + impact.oxygen
+    };
+  }, { co2Min: 0, co2Max: 0, oxygen: 0 });
+
   return (
-    <div className="max-w-7xl mx-auto p-6">
+    <div className="max-w-7xl mx-auto p-6 space-y-8">
       <PageHeader 
         title="Your Garden" 
         description="Your personal collection of selected plants and herbs."
         className="solar-glow-text mb-8"
       />
+
+      {garden.length > 0 && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <Card className="solar-card solar-gradient-border border-none bg-solar-glow/5 backdrop-blur-md overflow-hidden mb-8">
+            <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-2">
+              <div className="p-2 rounded-lg bg-solar-glow/20">
+                <Wind className="w-5 h-5 text-solar-glow" />
+              </div>
+              <CardTitle className="text-xl text-white">Estimated Environmental Impact</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <p className="text-sm text-white/40 uppercase tracking-wider font-bold">Annual CO₂ Absorption</p>
+                  <p className="text-3xl font-display font-bold text-solar-glow">
+                    ~{totalImpact.co2Min}–{totalImpact.co2Max} <span className="text-lg">kg/year</span>
+                  </p>
+                </div>
+                <div className="space-y-2">
+                  <p className="text-sm text-white/40 uppercase tracking-wider font-bold">Oxygen Contribution</p>
+                  <p className="text-3xl font-display font-bold text-white">
+                    ~{totalImpact.oxygen} <span className="text-lg text-white/60">people equivalent</span>
+                  </p>
+                  <p className="text-xs text-white/40 italic">
+                    Equivalent to the annual oxygen needs of about {totalImpact.oxygen} {totalImpact.oxygen === 1 ? 'person' : 'people'}
+                  </p>
+                </div>
+              </div>
+              
+              <div className="flex gap-3 p-4 rounded-xl bg-white/5 border border-white/5 items-start">
+                <Info className="w-4 h-4 text-solar-glow/60 shrink-0 mt-0.5" />
+                <p className="text-sm text-white/50 leading-relaxed">
+                  These values are approximate estimates intended to help users understand the positive environmental impact of their garden. Actual environmental impact varies based on plant age, health, climate, and care.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </motion.div>
+      )}
 
       {garden.length === 0 ? (
         <div className="h-96 flex flex-col items-center justify-center text-center text-white/20 border-2 border-dashed border-white/10 rounded-3xl bg-white/5 backdrop-blur-sm">
