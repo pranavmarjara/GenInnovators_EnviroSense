@@ -20,7 +20,6 @@ const NAV_ITEMS = [
   { href: "/plants", label: "Plants", icon: Leaf },
   { href: "/garden", label: "Your Garden", icon: Sprout },
   { href: "/solar", label: "Solar Calc", icon: SunMedium },
-  { href: "/heat-map", label: "Heat Map", icon: ThermometerSun },
   { href: "/brands", label: "Brand Impact", icon: ShoppingBag },
 ];
 
