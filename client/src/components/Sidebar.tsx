@@ -3,22 +3,33 @@ import {
   LayoutDashboard, 
   Leaf, 
   SunMedium, 
-  ThermometerSun, 
   ShoppingBag, 
   Menu,
   Search,
-  Sprout
+  Sprout,
+  ChevronDown
 } from "lucide-react";
 import { useState, useMemo, createContext, useContext } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 
 const NAV_ITEMS = [
   { href: "/", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/plants", label: "Plants", icon: Leaf },
-  { href: "/garden", label: "Your Garden", icon: Sprout },
+  { 
+    label: "Gardening", 
+    icon: Sprout,
+    children: [
+      { href: "/plants", label: "Plants", icon: Leaf },
+      { href: "/garden", label: "Your Garden", icon: Sprout },
+    ]
+  },
   { href: "/solar", label: "Solar Calc", icon: SunMedium },
   { href: "/brands", label: "Brand Impact", icon: ShoppingBag },
 ];
@@ -98,6 +109,61 @@ export function Sidebar() {
       
       <nav className="flex-1 px-4 space-y-2">
         {NAV_ITEMS.map((item) => {
+          if (item.children) {
+            const isChildActive = item.children.some(child => location === child.href);
+            return (
+              <Collapsible
+                key={item.label}
+                defaultOpen={isChildActive}
+                className="w-full"
+              >
+                <CollapsibleTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    className={cn(
+                      "w-full justify-between items-center gap-3 px-4 py-3 rounded-2xl transition-all duration-300 group overflow-hidden h-auto",
+                      isCollapsed && "justify-center px-3",
+                      isChildActive ? "text-white bg-white/5" : "text-white/40 hover:text-white"
+                    )}
+                  >
+                    <div className="flex items-center gap-3">
+                      <item.icon className={cn("w-5 h-5 transition-colors", isChildActive ? "text-solar-glow drop-shadow-[0_0_8px_rgba(251,191,36,0.5)]" : "text-white/40 group-hover:text-solar-glow")} />
+                      {!isCollapsed && <span className="font-medium">{item.label}</span>}
+                    </div>
+                    {!isCollapsed && <ChevronDown className="w-4 h-4 opacity-50" />}
+                  </Button>
+                </CollapsibleTrigger>
+                <CollapsibleContent className="space-y-1 mt-1">
+                  {item.children.map((child) => {
+                    const isActive = location === child.href;
+                    return (
+                      <Link
+                        key={child.href}
+                        href={child.href}
+                        className={cn(
+                          "relative flex items-center gap-3 px-4 py-2 rounded-xl transition-all duration-300 group overflow-hidden ml-4",
+                          isCollapsed && "ml-0 justify-center",
+                          isActive ? "text-white" : "text-white/40 hover:text-white"
+                        )}
+                        onClick={() => setOpen(false)}
+                      >
+                        {isActive && (
+                          <motion.div
+                            layoutId="activeNavSub"
+                            className="absolute inset-0 bg-white/5 backdrop-blur-md rounded-xl solar-gradient-border"
+                            initial={false}
+                          />
+                        )}
+                        <child.icon className={cn("w-4 h-4 z-10 transition-colors", isActive ? "text-solar-glow" : "text-white/40")} />
+                        {!isCollapsed && <span className="text-sm font-medium z-10">{child.label}</span>}
+                      </Link>
+                    );
+                  })}
+                </CollapsibleContent>
+              </Collapsible>
+            );
+          }
+
           const isActive = location === item.href;
           return (
             <Link key={item.href} href={item.href} className={cn(
