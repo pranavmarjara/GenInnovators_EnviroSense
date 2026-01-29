@@ -6,7 +6,8 @@ import {
   ThermometerSun, 
   ShoppingBag, 
   Menu,
-  Search
+  Search,
+  Sprout
 } from "lucide-react";
 import { useState, useMemo, createContext, useContext } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";

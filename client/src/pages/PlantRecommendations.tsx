@@ -12,6 +12,7 @@ import { Loader2, Sprout, Droplets, Sun, Plus, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { useGarden } from "@/hooks/use-garden";
+import { cn } from "@/lib/utils";
 
 export default function PlantRecommendations() {
   const { mutate, isPending, data: plants } = usePlantRecommendations();
@@ -228,17 +229,6 @@ export default function PlantRecommendations() {
               })}
             </AnimatePresence>
           </div>
-          
-          {hasSearched && plants?.length === 0 && (
-            <div className="text-center py-20 text-muted-foreground">
-              No plants found for these criteria. Try adjusting your filters.
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}
           
           {hasSearched && plants?.length === 0 && (
             <div className="text-center py-20 text-muted-foreground">
