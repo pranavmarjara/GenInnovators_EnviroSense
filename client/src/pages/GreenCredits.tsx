@@ -176,26 +176,6 @@ export default function GreenCredits() {
         </div>
       </section>
 
-      {/* Integration with Existing Features */}
-      <section className="space-y-8">
-        <h3 className="text-2xl font-display font-bold text-white text-center">Connection With Existing App Features</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {FEATURES.map((feature, index) => (
-            <Card key={index} className="solar-card border-none bg-white/5 hover-elevate transition-all duration-300">
-              <CardHeader className="text-center">
-                <div className="mx-auto p-3 rounded-xl bg-solar-glow/10 w-fit mb-4">
-                  <feature.icon className="w-6 h-6 text-solar-glow" />
-                </div>
-                <CardTitle className="text-lg text-white">{feature.title}</CardTitle>
-              </CardHeader>
-              <CardContent className="text-center pb-6">
-                <p className="text-sm text-white/50 leading-relaxed">{feature.description}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
       {/* Disclaimer */}
       <footer className="pt-12 border-t border-white/5">
         <div className="p-6 rounded-2xl bg-white/5 flex gap-4 items-start">
