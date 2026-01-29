@@ -49,7 +49,11 @@ export const api = {
       responses: {
         200: z.object({
           worthIt: z.boolean(),
-          panels: z.number().optional(),
+          panels: z.number(),
+          systemSizeKw: z.number(),
+          energyOffsetPercent: z.number(),
+          annualCo2ReductionTons: z.number(),
+          annualSavingsInr: z.number(),
           summary: z.string(),
         }),
       },

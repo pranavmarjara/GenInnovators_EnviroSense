@@ -1,5 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import { api, type CalculateSolarRequest } from "@shared/routes";
+import { api } from "@shared/routes";
+import type { CalculateSolarRequest } from "@shared/schema";
 
 export function useSolarCalculator() {
   return useMutation({

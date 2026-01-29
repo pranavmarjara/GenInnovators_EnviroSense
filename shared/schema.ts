@@ -58,7 +58,11 @@ export type CalculateSolarRequest = z.infer<typeof calculateSolarSchema>;
 
 export type SolarResult = {
   worthIt: boolean;
-  panels?: number;
+  panels: number;
+  systemSizeKw: number;
+  energyOffsetPercent: number;
+  annualCo2ReductionTons: number;
+  annualSavingsInr: number;
   summary: string;
 };
 

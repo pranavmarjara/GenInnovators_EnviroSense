@@ -97,26 +97,46 @@ export class MemStorage implements IStorage {
 
   async calculateSolar(params: CalculateSolarRequest): Promise<SolarResult> {
     const { dailyKwh } = params;
-    // Simple Mock Logic
-    // If usage is very low, maybe not worth it? Or always worth it?
-    // Let's say < 5kWh is not worth it for this mock.
     
+    // Panel specs: 500W monocrystalline, ~4 sun hours avg
+    const panelWatts = 500;
+    const sunHoursPerDay = 4;
+    const panelDailyKwh = (panelWatts / 1000) * sunHoursPerDay; // 2 kWh per panel per day
+    
+    // Calculate panels needed
+    const panelsNeeded = Math.ceil(dailyKwh / panelDailyKwh);
+    const systemSizeKw = (panelsNeeded * panelWatts) / 1000;
+    const dailyProduction = panelsNeeded * panelDailyKwh;
+    const energyOffsetPercent = Math.min(100, Math.round((dailyProduction / dailyKwh) * 100));
+    
+    // CO2 reduction: ~0.4 kg CO2 per kWh saved
+    const annualKwhSaved = dailyProduction * 365;
+    const annualCo2ReductionTons = Math.round((annualKwhSaved * 0.4) / 1000 * 10) / 10;
+    
+    // Savings: ~8 INR per kWh
+    const annualSavingsInr = Math.round(annualKwhSaved * 8);
+    
+    // Low usage threshold
     if (dailyKwh < 5) {
       return {
         worthIt: false,
-        summary: "Your energy usage is too low to justify the upfront cost of solar panels."
+        panels: panelsNeeded,
+        systemSizeKw,
+        energyOffsetPercent,
+        annualCo2ReductionTons,
+        annualSavingsInr,
+        summary: "Your energy usage is relatively low. Solar installation may not provide optimal return on investment for your current consumption patterns."
       };
     }
-
-    // Estimate panels (300W per panel, 4 sun hours avg)
-    // Daily Need = Kwh. Panel Daily Prod = 0.3 * 4 = 1.2 kWh
-    const panelsNeeded = Math.ceil(dailyKwh / 1.2);
-    const annualSavings = Math.round(dailyKwh * 0.15 * 365); // $0.15 per kWh
 
     return {
       worthIt: true,
       panels: panelsNeeded,
-      summary: `You could save approximately $${annualSavings} per year.`
+      systemSizeKw,
+      energyOffsetPercent,
+      annualCo2ReductionTons,
+      annualSavingsInr,
+      summary: "Based on your energy consumption and regional factors, solar installation is recommended for your location."
     };
   }
 

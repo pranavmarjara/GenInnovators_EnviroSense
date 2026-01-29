@@ -1,0 +1,55 @@
+Revamp the Solar Intelligence page so that after the user clicks “Analyze Solar”, the empty right-side panel transforms into a structured Solar Intelligence Report.
+
+Post-Calculation Requirements:
+
+1. Solar Verdict (Top of Result Panel)
+- Display a clear decision statement:
+  “Solar installation is recommended for your location”
+  OR
+  “Solar installation is not optimal for your location”
+- Use a check or warning icon.
+- Keep language confident and simple.
+
+2. Recommended Solar System Summary
+Show the following clearly:
+- Recommended number of panels (example: 5 panels)
+- Estimated system size (example: 2.5 kW)
+- Percentage of daily energy offset (example: ~80%)
+
+This section should be text-first, not chart-heavy.
+
+3. Solar Panel Specifications (Educational, Not Salesy)
+Display a small specs card with realistic, generic values:
+- Panel type: Monocrystalline
+- Power per panel: ~500 W
+- Efficiency: ~20%
+- Lifespan: 25 years
+- Maintenance level: Low
+
+Clarify that these are standard reference specifications, not brand-specific.
+
+4. Why This Recommendation (Decision Explanation)
+Add a short explanation block:
+“This recommendation is based on your region’s sunlight availability, air quality impact on panel efficiency, and your average daily energy usage.”
+
+This section is mandatory — it explains the decision.
+
+5. Environmental & Cost Impact (Compact)
+Display:
+- Estimated annual CO₂ reduction (example: ~1.8 tons)
+- Estimated annual electricity bill savings (example: ₹61,000 / year)
+
+Do not include NSS branding here. Keep it neutral.
+
+6. UI / Interaction Rules
+- The right panel should remain empty until calculation.
+- After calculation, content should fade or slide in.
+- Maintain the existing Solar Intelligence visual style.
+- No images, no brand logos, no external links.
+
+Goal:
+Turn the Solar Calculator into a Solar Intelligence Report that helps users understand:
+1) Whether solar is worth it
+2) How many panels they need
+3) What kind of panels are typically used
+4) Why the recommendation was made
